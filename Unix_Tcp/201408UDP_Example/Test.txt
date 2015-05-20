@@ -1,0 +1,19 @@
+This is a file which is tested by the UdpClient.cpp!
+这是一个测试文件，在程序UdpClient.ccp中读取!
+这个UdpClient.cpp程序也能将标准输入转化为文件指针，
+供UdpClient.cpp程序读取。
+只要将读取这个txt文件的那一行注释掉。
+就可以了。
+看看能不能用到。
+1
+2
+3
+545
+
+qwerty
+uiop
+asd
+
+ffghkll
+
+

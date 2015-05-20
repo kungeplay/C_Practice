@@ -1,0 +1,20 @@
+# 这个文件是我自己缩写，来验证或测试Inetd守护进程的用法，
+# 要注意格式，空格，不能添加注释
+#注意这个配置文件中的server参数,要实际标明可执行程序的地址
+#配置完后，将其移到/etc/xinetd.d/路径下，
+#在/etc/services文件中要赋予本服务一个名字和端口号。我用的是55544
+#要重新启动一下守护进程，才会生效
+#启动守护进程后，一定要查看日志文件，根据日志文件判断是否启动成功,
+#记录的日志文件可根据/etc/xinetd.conf中推导出来
+#disable= no	#启动与否,可设置该服务是否启动，若要启动就设置为no
+#socket_type = stream #stream为连接机制比较可靠的TCP数据包
+#wait = no  #TCP一般设置为no	
+service InetdServDaytime
+{
+	disable	 = no	
+	socket_type    = stream 
+	wait           = no  	
+	user           = Jiakun
+	server     = /home/Jiakun/C++Practice/Unix_Tcp/Daemon_Inetd/Daemon_Inetd/ServDaytimeTcpInetd 
+	log_on_failure += USERID
+}	

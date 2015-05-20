@@ -1,0 +1,14 @@
+ClientGet_AddrInfo.o : ClientGet_AddrInfo.cpp
+			g++ -c ClientGet_AddrInfo.cpp
+ServerGet_AddrInfo.o : ServerGet_AddrInfo.cpp
+			g++ -c ServerGet_AddrInfo.cpp
+myreadn_writen.o : myreadn_writen.cpp
+			g++ -c myreadn_writen.cpp
+myerror.o : myerror.cpp
+			g++ -c myerror.cpp
+mysock_ntop_host.o : mysock_ntop_host.cpp
+			g++ -c mysock_ntop_host.cpp
+ClientGet_AddrInfo : ClientGet_AddrInfo.o myreadn_writen.o myerror.o mysock_ntop_host.o
+			g++ ClientGet_AddrInfo.o myreadn_writen.o myerror.o mysock_ntop_host.o -o ClientGet_AddrInfo
+ServerGet_AddrInfo : myreadn_writen.o myerror.o ServerGet_AddrInfo.o 
+ 			g++ myreadn_writen.o myerror.o ServerGet_AddrInfo.o -o ServerGet_AddrInfo
