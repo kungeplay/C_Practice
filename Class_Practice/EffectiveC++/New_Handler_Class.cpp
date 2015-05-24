@@ -50,7 +50,9 @@ template<typename T> void * NewHandlerSupport<T>::operator new(std::size_t size)
 {
 	std::cout<<"NewHandlerSupport<T> new \tsize="<<size<<"\tsizeof(NewHandlerSupport<T>)="<<sizeof(NewHandlerSupport<T>)<<std::endl;
 	NewHandlerHolder h(std::set_new_handler(currentHandler));
-	return ::operator new(size);
+	void *p= ::operator new(size);//这种方式new并不调用构找函数
+	cout<<"---"<<endl;
+	return p;
 }
 template <typename T> std::new_handler NewHandlerSupport<T>::currentHandler=0;
 
