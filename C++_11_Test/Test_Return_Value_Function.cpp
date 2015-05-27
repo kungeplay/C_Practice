@@ -27,4 +27,9 @@ int main(int argc,char ** argv)
 	getline(cin,s);
 	string value=transform(s,sname);
 	cout<<value<<endl;
+	cout<<"map容器中的所有元素为:(注意map自动按照key排了序)"<<endl;
+	for(auto spair : sname)
+	{
+		cout<<spair.first<<"\t"<<spair.second<<endl;
+	}
 }
