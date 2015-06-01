@@ -23,6 +23,8 @@ class MyStack
 protected:
 	Sequence c;//底层容器
 public:
+	MyStack()=default;
+	template <typename InputIterator> MyStack(InputIterator first,InputIterator last):c(first,last){}
 	//以下操作完全利用Sequence c的操作，完成stack的操作
 	bool empty()const {return c.empty();}
 	size_type size()const {return c.size();}
@@ -49,6 +51,11 @@ int main(int argc, char const *argv[])
 	MyStack<int> ms1;
 	MyStack<int> ms2;
 	MyStack<int,list<int>>ms3;
+
+	int a[9]={1,2,3,4,5,6,7,8,9};
+	MyStack<int> ms4(a,a+9);
+
+
 	ms1.push(1);
 	ms1.push(2);
 	ms1.push(3);
