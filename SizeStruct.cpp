@@ -1,16 +1,47 @@
 #include <stdio.h>
+#include <stddef.h>//offsetof宏
 //测试一下结构体的sizeof
-//1、数据成员对齐规则：结构体（struct）的数据成员，第一个数据成员放在offset为0的地方，之后的每个数据成员存储的起始位置要从该成员大小的整数倍开始（比如int在32位机子上为4字节，所以要从4的整数倍地址开始存储）。
-//2、结构体作为成员：如果一个结构体里同时包含结构体成员，则结构体成员要从其内部最大元素大小的整数倍地址开始存储（如struct a里有struct b,b里有char,int ,double等元素，那么b应该从8(即double类型的大小)的整数倍开始存储）。
-//3、结构体的总大小：即sizeof的结果。在按之前的对齐原则计算出来的大小的基础上，必须还得是其内部最大成员的整数倍，不足的要补齐（如struct里最大为double，现在计算得到的已经是11，则总大小为16）。/
+//在网上找了那么多关于struct结构体对齐的解答，发现还是C和指针上给的最通俗易懂。另为offset宏表达式的结果是一个size_t值，表示这个指定成员开始存储的位置距离结构开始存储的位置偏移几个字节。
 struct st
 {
+	char e;	
 	int a;
 	long b;
 	double c;
 	float d;
-	char e;
+	char f;
 } t1;
+struct st2
+{
+	long b;
+	double c;
+	int a;	
+	float d;
+	char e;
+	char f;	
+};
+class cla1
+{
+public:
+	long a;
+};
+class cla2
+{
+	long a;
+	virtual void f();
+};
+void cla2::f()
+{
+	printf("-------\n");
+}
+
+class X{};
+class Y:public virtual X{};
+class Z:public virtual X{};
+class A:public Y,public Z{};
+
+
+
 int main(int argc,char *argv[])
 {
 	printf ("sizeof(int)=%d\n",sizeof(int));
@@ -18,6 +49,26 @@ int main(int argc,char *argv[])
 	printf ("sizeof(double)=%d\n",sizeof(double));
 	printf ("sizeof(float)=%d\n",sizeof(float));
 	printf ("sizeof(char)=%d\n",sizeof(char));
+	printf("sizeof(char *)=%d\n",sizeof(char *) );
 	printf ("sizeof(st)=%d\n",sizeof(st));
+	printf ("sizeof(st2)=%d\n",sizeof(st2));	
+	printf("%d\n",offsetof(struct st,e));
+	printf("%d\n",offsetof(struct st,a));
+	printf("%d\n",offsetof(struct st,b));
+	printf("%d\n",offsetof(struct st,c));
+	printf("%d\n",offsetof(struct st,d));
+	printf("%d\n",offsetof(struct st,f));
+
+	printf("sizeof(cla1)=%d\n",sizeof(cla1) );
+	printf("%d\n",&cla1::a );	
+	printf("sizeof(cla2)=%d\n",sizeof(cla2) );
+
+	printf("sizeof(X)=%d\n",sizeof(X));
+	printf("sizeof(Y)=%d\n",sizeof(Y));
+	printf("sizeof(Z)=%d\n",sizeof(Z));
+	printf("sizeof(A)=%d\n",sizeof(A));
+	X a,b;
+	printf("&a=0x%x\t&b=0x%x\n", &a,&b);
+
 	return 0;
 }
