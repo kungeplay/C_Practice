@@ -85,7 +85,7 @@ private:
 	{
 		if(low<high)
 		{
-			int pivotloc=Partition(nums,low,high);
+			int pivotloc=Partition(nums,low,high);//pivot是枢纽,中心的意思 loc是location的缩写
 			qSort(nums,low,pivotloc-1);
 			qSort(nums,pivotloc+1,high);
 		}
