@@ -89,7 +89,7 @@ private:
 };
 int main(int argc, char const *argv[])
 {
-	vector<int> v={1,3,1};
+	vector<int> v={1,2,3,4,5};
 	Solution so;
 	vector<vector<int>> rest_value=so.permute(v);
 	for(size_t i=0;i<rest_value.size();++i)
