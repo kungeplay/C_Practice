@@ -6,6 +6,7 @@
 #include <iostream>
 using namespace std;
 //这个题我不会，从网上找到的二分查找方法，要注意变量类型都定义long类型，尤其是mid和sum;
+//也可以转化为一元二次方程，然后求解，用牛顿迭代公式来做，关于牛顿迭代公式见http://blog.csdn.net/doc_sgl/article/details/12404971 网址。
 class Solution {
 public:
     int mySqrt(int x) {
