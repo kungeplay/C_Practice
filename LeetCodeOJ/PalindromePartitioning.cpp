@@ -107,47 +107,99 @@ using namespace std;
 // };
 //从网上找的一个算法，用深度优先遍历，先从0开始比如到end位置找到一个一个回文字串，然后再从end+1位置开始从后边再找一个回文字串，直到字符串结束，
 //算一次插入到res中。一直这样下去。，察确实高效，12ms
+// class Solution {
+// public:
+// 	vector<vector<string>> partition(string s) {
+// 		vector<string> path;
+// 		vector<vector<string>> res;
+// 		dfs(s,path,res);
+// 		return res;
+// 	}
+// private:
+// 	void dfs(const string &s,vector<string> &path,vector<vector<string>> &res)
+// 	{
+// 		if(s.size()<1)
+// 		{
+// 			res.push_back(path);
+// 			return;
+// 		}
+// 		for(size_t i=0;i<s.size();++i)
+// 		{
+// 			int begin=0;
+// 			int end=i;
+// 			while(begin<=end)//注意这里会有重复的循环，在下一个算法里，主要是用动态规划方法优化这个。
+// 			{
+// 				if(s[begin]!=s[end])
+// 					break;
+// 				++begin;
+// 				--end;
+// 			}
+// 			if(begin>end)
+// 			{
+// 				path.push_back(s.substr(0,i+1));
+// 				dfs(s.substr(i+1),path,res);
+// 				path.pop_back();
+// 			}
+// 		}
+// 	}
+// };
+
+//这个算法是上一个算法的改进，先利用动态规划法求出所有的回文子串
+//具体思想见http://blog.csdn.net/worldwindjp/article/details/22042133
 class Solution {
 public:
 	vector<vector<string>> partition(string s) {
 		vector<string> path;
 		vector<vector<string>> res;
-		dfs(s,path,res);
+		vector<vector<bool>> palindrome_map(s.size(),vector<bool>(s.size(),false));
+		dp(s,palindrome_map);
+		dfs(s,0,path,res,palindrome_map);
 		return res;
 	}
 private:
-	void dfs(const string &s,vector<string> &path,vector<vector<string>> &res)
+	void dfs(const string &s,int drift,vector<string> &path,vector<vector<string>> &res,const vector<vector<bool>> &palindrome_map)
 	{
-		if(s.size()<1)
+		int len=s.size();
+		if(drift>=len)
 		{
 			res.push_back(path);
 			return;
 		}
-		for(size_t i=0;i<s.size();++i)
+		for(int i=drift;i<len;++i)
 		{
-			int begin=0;
-			int end=i;
-			while(begin<=end)
+			if(palindrome_map[drift][i])
 			{
-				if(s[begin]!=s[end])
-					break;
-				++begin;
-				--end;
-			}
-			if(begin>end)
-			{
-				path.push_back(s.substr(0,i+1));
-				dfs(s.substr(i+1),path,res);
+				path.push_back(s.substr(drift,i-drift+1));//复制子字符串，要求从指定位置开始，并具有指定的长度。
+				dfs(s,i+1,path,res,palindrome_map);
 				path.pop_back();
+			}
+		}
+	}
+	void dp(const string &s,vector<vector<bool>> & palindrome_map)
+	{
+		int len=s.size();
+		for(int i=len-1;i>=0;--i)
+		{
+			for(int j=i;j<=len-1;++j)
+			{
+				if(j==i)
+					palindrome_map[i][j]=true;
+				else if(s[i]==s[j])
+				{
+					if(j==i+1||palindrome_map[i+1][j-1])
+						palindrome_map[i][j]=true;
+				}
+
 			}
 		}
 	}
 };
 
 
+
 int main(int argc, char const *argv[])
 {
-	string s="abbbbbb";
+	string s="cdd";
 	Solution so;
 	vector<vector<string>> partitionPalindrome=so.partition(s);
 	for(size_t i=0;i<partitionPalindrome.size();++i)
