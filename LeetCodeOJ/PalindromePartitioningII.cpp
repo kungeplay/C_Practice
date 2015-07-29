@@ -10,7 +10,7 @@
 #include <vector>
 
 using namespace std;
-
+//下面这种算法我是仿照Palindrome Partitioning来改进的，DFS结果超时
 // class Solution {
 // public:
 // 	int minCut(string s) {
@@ -72,6 +72,7 @@ using namespace std;
 
 //这个又是动态规划，结果还挺简洁的，dp[i]表示区间[i,n]之间最小的cut数，n为字符串长度见http://blog.csdn.net/doc_sgl/article/details/13418125
 //D[i] = min(1+D[j+1] )    i<=j <n，如果[i,j]之间是回文的话。
+////这个网址讲的非常给力：http://blog.csdn.net/yutianzuijin/article/details/16850031
 class Solution {
 public:
 	int minCut(string s) {
