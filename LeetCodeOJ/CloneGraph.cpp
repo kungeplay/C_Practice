@@ -41,6 +41,9 @@ struct UndirectedGraphNode {
 
  //不容易呀，按照剑指offer上的一个复制复杂链表题的思路，在这个题里也是先把复制的链表节点放在后面，
  //看到网上说的大都是用map表做当前节点和复制节点的映射，这样，第二次循环的时候，复制neighbors中的内容，这也是剑指offer里的思路。
+ //又看了看这个题和刚做的一个题Copy List with Random Pointer相比，感觉由于题中说了label标志惟一，感觉用map表应该效率更好些，
+ //这个网站说的挺好：http://blog.csdn.net/lanxu_yy/article/details/17802415
+ //，http://www.cnblogs.com/xinsheng/p/3515119.html。
 class Solution {
 public:
     UndirectedGraphNode *cloneGraph(UndirectedGraphNode *node) {
