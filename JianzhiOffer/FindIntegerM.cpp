@@ -12,7 +12,7 @@ public:
 		vector<vector<int>> bigInt(N);			//bigInt只记录整数中1出现的位置，比如1001,记为(0,3)=10^0+10^3
 		bigInt[1].push_back(0);				//余数为1时k为0
 
-		for (int i=1,j=10%N ; ; ++i,j=(j*10)%N)		//j表示10^k与N的模，即10^k与N的余数;i表示其中的k
+		for (int i=1,j=10%N ; ; ++i,j=(j*10)%N)		//j表示10^k与N的模，即10^k与N的余数,注意这里的j是利用上一次循环的j算出来的;i表示其中的k
 		{
 			if(bigInt[j].size()==0)			//保存10^k与N的余数
 				bigInt[j].push_back(i);
