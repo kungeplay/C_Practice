@@ -83,7 +83,7 @@ int encodeBase64(const char * pInput, char * pOutput)
 int main(int argc, char const *argv[])
 {
 	string username= "xiumu826";
-	string password="sqfj2005";
+	string password="*******";
 	string smtpServer="smtp.126.com";
 	string fromAddress="xiumu826@126.com";
 	string toAddress="blueskywww@126.com";
